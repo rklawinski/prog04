@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 		<style>
 		label {
 			width: 60px;
@@ -27,32 +29,12 @@ formatted using CSS. </p>
 		
 		<br>
 		<br>
-		
 		<div id="div1">
-			<form id="form1">
-				<fieldset id="fieldset1"><legend>People </legend>
-				<label for="fname0">Given Name</label>
-				<input name="fname0" id="fname0" type="text" placeholder="Jane" size="10" autofocus="autofocus">
-				
-				<label for="lname0">Surname </label>
-				<input name="lname0" id="lname0" type="text" placeholder="Doe" size="10">
-				
-				<label for="sbDay0">Solar Birth Day </label>
-				<input name="age0" id="age0" type="number" placeholder="18" size="10">
-				
-				<label for="sbMonth0">Solar Birth Month </label>
-				<input name="age0" id="age0" type="number" placeholder="18" size="10">
-				
-				<label for="sbYear0">Solar Birth Year </label>
-				<input name="age0" id="age0" type="number" placeholder="18" size="10">
-				
-				<label for="country0">Country </label>
-				<input name="country0" id="country0" type="text" placeholder="USA" size="10">
-		<br>
-				</fieldset>
-			</form>
+		<form id="form1">
+		<fieldset id="fieldset1">
+		</fieldset>
+		</form>
 		</div>
-		<br>
 		<button type="button" onclick="addLine();">Add Line</button>
 
 		
@@ -74,115 +56,101 @@ input field of the HTML entry form. </p>
 of objects, where each property of an object contains the data in the 
 input field of the HTML entry form. </p>
 		
-		<button type="button" onclick="">Generate and Display Table</button>
+		<button type="button" onclick="genTable();">Generate and Display Table</button>
 		<br>
 		<br>
 		
 		<div id="div3">
 		</div>
 		
-		<!-- The table, below, shows examples of data. Do not include any HTML-coded table in your code. Instead, use JavaScript to append a table to the div, above. -->
-		<table border="1">
-		  <tbody><tr>
-			<th>Given Name</th>
-			<th>Surname</th>
-			<th>Solar Birth Day</th>
-			<th>Solar Birth Month</th>
-			<th>Solar Birth Year</th>
-			<th>Country</th>
-
-		  </tr>
-		  <tr>
-			<td>Deng Xiaoping</td>
-			<td>1904-08-22</td>
-			<td>115</td>
-			<td>Dragon</td>
-			<th>Solar Birth Year</th>
-			<th>Country</th>
-		  </tr>
-		  <tr>
-			<td>Dwight Eisenhower</td>
-			<td>10-14-1890</td>
-			<td>128</td>
-			<td>Libra</td>
-			<th>Solar Birth Year</th>
-			<th>Country</th>
-		  </tr>
-
-		</tbody></table>
 
 		<script>
 		
 // GLOBAL VARIABLES
+
 var currentLine = 0;
-var inputWidth  = 10;
+var inputWidth  = 8;
 var objArray    = [];
+
 // FUNCTIONS
+
 /* addForm()
  * appends an entry form to an HTML element with id="div1"
  */
 function addForm() {
 	// precondition: HTML must contain <div id="div1"> element
-	// create a new form element, and append to div1
+
 	var newelement = document.createElement("form");
 	newelement.setAttribute("id","form1");
 	var div1 = document.getElementById("div1");
 	div1.appendChild(newelement);
+
 	// create a new fieldset element, and append to form1
 	var newelement = document.createElement("fieldset");
 	newelement.setAttribute("id","fieldset1");
 	var form1 = document.getElementById("form1");
 	form1.appendChild(newelement);
+
 	// create a new legend element, and append to fieldset1
 	var newelement = document.createElement("legend");
 	var textnode = document.createTextNode("People ");
 	newelement.appendChild(textnode);
 	var fieldset1 = document.getElementById("fieldset1");
 	fieldset1.appendChild(newelement);
+
 	// create a new label element, and append to fieldset1
 	var newelement = document.createElement("label");
-	newelement.setAttribute("for","fname"+currentLine);
-	var textnode = document.createTextNode("First");
+	newelement.setAttribute("for","gname"+currentLine);
+	var textnode = document.createTextNode("Given Name");
 	newelement.appendChild(textnode);
 	var fieldset1 = document.getElementById("fieldset1");
 	fieldset1.appendChild(newelement);
+
 	// create a new input element, and append to fieldset1
 	var newelement = document.createElement("input");
-	newelement.setAttribute("name","fname"+currentLine);
-	newelement.setAttribute("id","fname"+currentLine);
+	newelement.setAttribute("name","gname"+currentLine);
+	newelement.setAttribute("id","gname"+currentLine);
 	newelement.setAttribute("type","text");
 	newelement.setAttribute("placeholder","Jane");
 	newelement.setAttribute("size",10);
 	if (currentLine==0) newelement.setAttribute("autofocus","autofocus");
 	var fieldset1 = document.getElementById("fieldset1");
 	fieldset1.appendChild(newelement);
+
 	// add more fields 
-	addField("fieldset1", "lname", "Last", "text", "Doe", inputWidth);
-	addField("fieldset1", "age", "Age", "number", "18", inputWidth);
+	addField("fieldset1", "sname", "Surname", "text", "Doe", inputWidth);
+	addField("fieldset1", "sbday", "Solar Birth Day", "number", "18", inputWidth);
+	addField("fieldset1", "sbmonth", "Solar Birth Month", "number", "6", inputWidth);
+	addField("fieldset1", "sbyear", "Solar Birth Year", "number", "2000", inputWidth);
 	addField("fieldset1", "country", "Country", "text", "USA", inputWidth);
+
+
 	// add line break 
 	var newelement = document.createElement("br");
 	var fieldset1 = document.getElementById("fieldset1");
 	fieldset1.appendChild(newelement);
+
 	// increment line counter
 	currentLine++;
 }
+
 /* addLine()
  * inserts all labels and input elements for one row of a form
  */
 function addLine () {
-	// precondition: inputWidth global variable must be set
-	// precondition: call from addForm() so HTML element with id="fieldset1" exists
 	
-	addField("fieldset1", "fname", "First", "text", "Jane", inputWidth);
-	addField("fieldset1", "lname", "Last", "text", "Doe", inputWidth);
-	addField("fieldset1", "age", "Age", "number", "18", inputWidth);
+	addField("fieldset1", "gname", "Given Name", "text", "Jane", inputWidth);
+	addField("fieldset1", "sname", "Surname", "text", "Doe", inputWidth);
+	addField("fieldset1", "sbday", "Solar Birth Day", "number", "18", inputWidth);
+	addField("fieldset1", "sbmonth", "Solar Birth Month", "number", "6", inputWidth);
+	addField("fieldset1", "sbyear", "Solar Birth Year", "number", "2000", inputWidth);
 	addField("fieldset1", "country", "Country", "text", "USA", inputWidth);
 	var newelement = document.createElement("br");
 	var fieldset1 = document.getElementById("fieldset1");
 	fieldset1.appendChild(newelement);
 	currentLine++;
 }
+
 /* addField()
  * inserts one label one input element into a row of a form 
  */
@@ -190,6 +158,7 @@ function addField(formId, namePrefix, labelText, dataType, placeholder, fieldSiz
 	// precondition: currentLine (global variable) must be set
 	// precondition: objArray[] (global variable) must be declared
 	// precondition: call from addLine() so HTML element with id=formID exists
+
 	// create a new label element, and append to form (or fieldset)
 	var n = document.createElement("label");
 	n.setAttribute("for",namePrefix+currentLine);
@@ -207,7 +176,9 @@ function addField(formId, namePrefix, labelText, dataType, placeholder, fieldSiz
 	n.setAttribute("size",fieldSize);
 	var f = document.getElementById(formId);
 	f.appendChild(n);
+
 }
+
 /* genObjectArray()
  * generates content for an array of objects, 
  * where each element of the array 
@@ -216,12 +187,15 @@ function addField(formId, namePrefix, labelText, dataType, placeholder, fieldSiz
 function genObjectArray() {
 	// precondition: HTML must contain <div id="div2"> element
 	// precondition: currentLine (global variable) must be set
+
 	// generate objArray from HTML form elements
 	for(i = 0; i < currentLine; i++) {
 		objArray[i] = {
-			'fname'     :document.getElementById("fname"+i).value,
-			'lname'     :document.getElementById("lname"+i).value,
-			'age'       :parseInt(document.getElementById("age"+i).value)?parseInt(document.getElementById("age"+i).value):0, 
+			'gname'     :document.getElementById("gname"+i).value,
+			'sname'     :document.getElementById("sname"+i).value,
+			'sbday'     :parseInt(document.getElementById("sbday"+i).value)?parseInt(document.getElementById("sbday"+i).value):0,
+			'sbmonth'   :parseInt(document.getElementById("sbday"+i).value)?parseInt(document.getElementById("sbmonth"+i).value):0, 
+			'sbyear'    :parseInt(document.getElementById("sbday"+i).value)?parseInt(document.getElementById("sbyear"+i).value):0, 
 			'country'   :document.getElementById("country"+i).value,
 			'countryAge':function () {
 				if('China'==this.country)
@@ -231,6 +205,7 @@ function genObjectArray() {
 				}
 		};
 	}
+
 	// display objArray
 	var divContent = "<ol start='0'>";
 	objArray.forEach(function(e) {
@@ -242,13 +217,43 @@ function genObjectArray() {
 	divContent += "</ol>";
 	document.getElementById("div2").innerHTML = divContent;
 }
+
 /* genTable()
  * generates an HTML table containing localized output from 
  */
-			</script>
-			
-		
+ function genTable() {
+	// create a new table element, and append to div3
+	var newelement = document.createElement("table");
+	newelement.setAttribute("id","table1");
+	table.setAttribute("class", "table table-striped");
+	var div3 = document.getElementById("div3");
+	div3.appendChild(newelement);
 
+
+	var tableHeader = table.createTHead();
+	var headerRow = tableHeader.insertRow(-1);
+				
+	var givenName = headerRow.insertCell(-1);
+	givenName.outerHTML = "<th>Given Name</th>";
+				
+	var surname = headerRow.insertCell(-1);
+	surname.outerHTML = "<th>Surname</th>";
+				
+	var sbd = headerRow.insertCell(-1);
+	sbd.outerHTML = "<th>Solar Birth Day</th>";
+				
+	var sbm = headerRow.insertCell(-1);
+	sbm.outerHTML = "<th>Solar Birth Month</th>";
+				
+	var sby = headerRow.insertCell(-1);
+	sby.outerHTML = "<th>Solar Birth Year</th>";
+				
+	var country = headerRow.insertCell(-1);
+	country.outerHTML = "<th>Country</th>";
+	var tableBody = table.createTBody();
 	
+ }
+
+</script>
 
 </body></html>
